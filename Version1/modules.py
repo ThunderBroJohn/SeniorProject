@@ -6,7 +6,6 @@ These are modules or
 import pyttsx3 
 #import speech_recognition as sr
 import time
-import random
 from threading import Thread
 import datetime
 import numpy as np
@@ -18,8 +17,6 @@ import json
 #import geocoder
 import socket
 #import timerAndAlarm
-import psutil
-
 
 # initialisation of test to speach engine
 engine = pyttsx3.init() 
@@ -332,58 +329,6 @@ def reminder_prep(textInput):
     joinedNote = joinedNote.join(noteThis)
     return joinedNote, hour, minute
     
-def system_status():
-    #gather raw data
-    cpuPerc = psutil.cpu_percent(interval=1)
-    vm = psutil.virtual_memory()
-    totalM = vm.total
-    avalibleM = vm.available
-    diskData = psutil.disk_usage('/')
-    diskU = diskData.used
-    diskT = diskData.total
-    diskA = diskT - diskU
-    #convert to gigs
-    totalM = round((totalM / 1000000000),2)
-    avalibleM = round((avalibleM / 1000000000),2)
-    diskU = round((diskU / 1000000000),2)
-    diskT = round((diskT / 1000000000),2)
-    diskA = round((diskA / 1000000000),2)
 
-    data  = "CPU usage is at " + str(cpuPerc) + " percent. Memory usage is " + str(totalM)
-    data += " gigabytes with " + str(avalibleM) + " free. Disk usage is " + str(diskU)
-    data += " gigabytes of " + str(diskT) + " with " + str(diskA) + " gigabytes avalible." 
-    return data
 
-def random_joke():
-    randNum = random.randint(1,5)
 
-    if (randNum == 1):
-        engine.say("How can the dog help fix a computer")
-        engine.runAndWait()
-        time.sleep(1)
-        engine.say("He can give it a byte")
-        engine.runAndWait()
-    elif(randNum == 2):
-        engine.say("What is the name of the plummer who unclogs the sink?")
-        engine.runAndWait()
-        time.sleep(1)
-        engine.say("Dwane")
-        engine.runAndWait()
-    elif(randNum == 3):
-        engine.say("What is the name of the plummer who turns on the water?")
-        engine.runAndWait()
-        time.sleep(1)
-        engine.say("Phil")
-        engine.runAndWait()
-    elif(randNum == 4):
-        engine.say("Why did the psychiatrist assist in organ transplants?")
-        engine.runAndWait()
-        time.sleep(1)
-        engine.say("He was great at heart to hearts.")
-        engine.runAndWait()
-    else:
-        engine.say("Why are british science fictions confusing?")
-        engine.runAndWait()
-        time.sleep(1)
-        engine.say("Because Who is the protagonist.")
-        engine.runAndWait()
